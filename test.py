@@ -1,4 +1,4 @@
-docs_paths = ["sam1.txt", "sam2.txt", "sam3.txt", "trump1.txt", "trump2.txt", "yes1.txt", "yes2.txt"]
+docs_paths = ["sam1.txt", "sam2.txt", "trump1.txt", "trump2.txt", "yes1.txt", "yes2.txt"]
 
 # Prepare datasets and evaluation
 docs = []
@@ -22,9 +22,9 @@ answers = [
 ]
 
 gold_docs = [
-    docs[0:3],
-    docs[3:5],
-    docs[5:]
+    docs[0:2],
+    docs[2:4],
+    docs[4:]
 ]
 
 print(gold_docs)
