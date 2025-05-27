@@ -7,19 +7,15 @@ import logging
 from src.hipporag import HippoRAG
 
 def main():
+    docs_paths = ["sam1.txt", "sam2.txt", "sam3.txt", "trump1.txt", "trump2.txt", "yes1.txt", "yes2.txt"]
 
     # Prepare datasets and evaluation
-    docs = [
-        "Oliver Badman is a politician.",
-        "George Rankin is a politician.",
-        "Thomas Marwick is a politician.",
-        "Cinderella attended the royal ball.",
-        "The prince used the lost glass slipper to search the kingdom.",
-        "When the slipper fit perfectly, Cinderella was reunited with the prince.",
-        "Erik Hort's birthplace is Montebello.",
-        "Marina is bom in Minsk.",
-        "Montebello is a part of Rockland County."
-    ]
+    docs = []
+
+    for path in docs_paths:
+        with open(path, "r") as f:
+            content = f.read()
+            docs.append(content)
 
     save_dir = 'outputs/openai'  # Define save directory for HippoRAG objects (each LLM/Embedding model combination will create a new subdirectory)
     llm_model_name = 'openai/gpt-4o-mini'  # Any OpenAI model name
@@ -37,25 +33,22 @@ def main():
 
     # Separate Retrieval & QA
     queries = [
-        "What is George Rankin's occupation?",
-        "How did Cinderella reach her happy ending?",
-        "What county is Erik Hort's birthplace a part of?"
+        "Who is the individual associated with the cryptocurrency industry facing a criminal trial on fraud and conspiracy charges, as reported by both The Verge and TechCrunch, and is accused by prosecutors of committing fraud for personal gain?",
+        "Which individual is implicated in both inflating the value of a Manhattan apartment to a figure not yet achieved in New York City's real estate history, according to 'Fortune', and is also accused of adjusting this apartment's valuation to compensate for a loss in another asset's worth, as reported by 'The Age'?",
+        "Do the TechCrunch article on software companies and the Hacker News article on The Epoch Times both report an increase in revenue related to payment and subscription models, respectively?"
     ]
 
     # For Evaluation
     answers = [
-        ["Politician"],
-        ["By going to the ball."],
-        ["Rockland County"]
+        ["Sam Bankman-Fried"],
+        ["Donald Trump"],
+        ["Yes"]
     ]
 
     gold_docs = [
-        ["George Rankin is a politician."],
-        ["Cinderella attended the royal ball.",
-         "The prince used the lost glass slipper to search the kingdom.",
-         "When the slipper fit perfectly, Cinderella was reunited with the prince."],
-        ["Erik Hort's birthplace is Montebello.",
-         "Montebello is a part of Rockland County."]
+        docs[0:3],
+        docs[3:5],
+        docs[5:]
     ]
 
     print(hipporag.rag_qa(queries=queries,
