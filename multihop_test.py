@@ -18,7 +18,7 @@ def main():
             docs.append(content)
 
     save_dir = 'outputs/openai'  # Define save directory for HippoRAG objects (each LLM/Embedding model combination will create a new subdirectory)
-    llm_model_name = 'openai/gpt-4o-mini'  # Any OpenAI model name
+    llm_model_name = 'openai/gpt-4o'  # Any OpenAI model name
     embedding_model_name = 'nvidia/NV-Embed-v2'  # Embedding model name (NV-Embed, GritLM or Contriever for now)
     llm_base_url = 'https://models.github.ai/inference' # LLM API endpoint
 
