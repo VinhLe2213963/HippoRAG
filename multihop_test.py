@@ -12,10 +12,10 @@ def main():
     # Prepare datasets and evaluation
     docs = list(df['content'])
 
-    save_dir = 'outputs/gemini'  # Define save directory for HippoRAG objects (each LLM/Embedding model combination will create a new subdirectory)
-    llm_model_name = 'gemini-2.0-flash'  # Any OpenAI model name
+    save_dir = 'outputs/openai'  # Define save directory for HippoRAG objects (each LLM/Embedding model combination will create a new subdirectory)
+    llm_model_name = 'openai/gpt-4o-mini'  # Any OpenAI model name
     embedding_model_name = 'nvidia/NV-Embed-v2'  # Embedding model name (NV-Embed, GritLM or Contriever for now)
-    llm_base_url = 'https://generativelanguage.googleapis.com/v1beta/' # LLM API endpoint
+    llm_base_url = 'https://models.github.ai/inference' # LLM API endpoint
     # https://models.github.ai/inference      openai/gpt-4o-mini
     # https://api.deepseek.com        deepseek-chat
     # https://generativelanguage.googleapis.com/v1beta/
