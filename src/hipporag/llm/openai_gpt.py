@@ -159,7 +159,6 @@ class CacheOpenAI(BaseLLM):
                 "model": self.global_config.llm_name,
                 "max_completion_tokens": config_dict.get("max_new_tokens", 400),
                 "n": config_dict.get("num_gen_choices", 1),
-                "seed": config_dict.get("seed", 0),
                 "temperature": config_dict.get("temperature", 0.0),
             }
 
@@ -177,8 +176,6 @@ class CacheOpenAI(BaseLLM):
         if kwargs:
             params.update(kwargs)
         params["messages"] = messages
-
-        params['model'] = "gemini-2.0-flash"
 
 
         logger.debug(f"Calling OpenAI GPT API with:\n{params}")
