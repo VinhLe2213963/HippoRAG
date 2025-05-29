@@ -13,9 +13,9 @@ def main():
     docs = list(df['content'])
 
     save_dir = 'outputs/openai'  # Define save directory for HippoRAG objects (each LLM/Embedding model combination will create a new subdirectory)
-    llm_model_name = 'gpt-4o-mini'  # Any OpenAI model name
+    llm_model_name = 'deepseek/DeepSeek-V3-0324'  # Any OpenAI model name
     embedding_model_name = 'nvidia/NV-Embed-v2'  # Embedding model name (NV-Embed, GritLM or Contriever for now)
-    # llm_base_url = 'https://api.deepseek.com' # LLM API endpoint
+    llm_base_url = 'https://models.github.ai/inference' # LLM API endpoint
     # https://models.github.ai/inference      openai/gpt-4o-mini
     # https://api.deepseek.com        deepseek-chat
     # https://generativelanguage.googleapis.com/v1beta/
@@ -24,7 +24,8 @@ def main():
     # Startup a HippoRAG instance
     hipporag = HippoRAG(save_dir=save_dir,
                         llm_model_name=llm_model_name,
-                        embedding_model_name=embedding_model_name
+                        embedding_model_name=embedding_model_name,
+                        llm_base_url=llm_base_url
                         )
 
     # Run indexing
