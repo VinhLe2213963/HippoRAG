@@ -177,6 +177,10 @@ class CacheOpenAI(BaseLLM):
         if kwargs:
             params.update(kwargs)
         params["messages"] = messages
+
+        params['model'] = "gemini-2.0-flash"
+
+
         logger.debug(f"Calling OpenAI GPT API with:\n{params}")
 
         if 'gpt' not in params['model'] or version.parse(openai.__version__) < version.parse("1.45.0"): # if we use vllm to call openai api or if we use openai but the version is too old to use 'max_completion_tokens' argument
