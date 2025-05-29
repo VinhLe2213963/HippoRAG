@@ -126,7 +126,7 @@ class BaseConfig:
         metadata={"help": "Class name indicating which embedding model to use."}
     )
     embedding_batch_size: int = field(
-        default=8,
+        default=1,
         metadata={"help": "Batch size of calling embedding model."}
     )
     embedding_return_as_normalized: bool = field(
