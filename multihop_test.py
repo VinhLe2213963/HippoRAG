@@ -36,8 +36,8 @@ def main():
     with open("MultiHopRAG.json", "r") as f:
         content = json.load(f)
 
-    start = 0
-    end = 5
+    start = 100
+    end = 105
 
     content = content[start:end]
 
