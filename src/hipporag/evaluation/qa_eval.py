@@ -36,11 +36,6 @@ class QAExactMatch(BaseMetric):
         total_em = 0
 
         for gold_list, predicted in zip(gold_answers, predicted_answers):
-            print("-----------------------------------------")
-            print("GOLD_LIST:", gold_list)
-            print("NORMALIZE_ANSWER_GOLD:", [normalize_answer(gold) for gold in gold_list])
-            print("NORMALIZE_ANSWER_PRED:", normalize_answer(predicted))
-            print("-----------------------------------------")
             em_scores = [1.0 if normalize_answer(gold_list) == normalize_answer(predicted) else 0.0]
 
             aggregated_em = aggregation_fn(em_scores)
@@ -91,7 +86,8 @@ class QAF1Score(BaseMetric):
         total_f1 = 0.0
 
         for gold_list, predicted in zip(gold_answers, predicted_answers):
-            f1_scores = [compute_f1(gold, predicted) for gold in gold_list]
+            # f1_scores = [compute_f1(gold, predicted) for gold in gold_list]
+            f1_scores = [compute_f1(gold_list, predicted)]
             aggregated_f1 = aggregation_fn(f1_scores)
             example_eval_results.append({"F1": aggregated_f1})
             total_f1 += aggregated_f1
