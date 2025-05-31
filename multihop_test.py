@@ -4,6 +4,7 @@ import json
 import argparse
 import logging
 import pandas as pd
+import json
 from src.hipporag import HippoRAG
 
 def main():
@@ -32,33 +33,30 @@ def main():
     hipporag.index(docs=docs)
 
     # Separate Retrieval & QA
-    queries = [
-        "Who is the individual associated with the cryptocurrency industry facing a criminal trial on fraud and conspiracy charges, as reported by both The Verge and TechCrunch, and is accused by prosecutors of committing fraud for personal gain?",
-        "Which individual is implicated in both inflating the value of a Manhattan apartment to a figure not yet achieved in New York City's real estate history, according to 'Fortune', and is also accused of adjusting this apartment's valuation to compensate for a loss in another asset's worth, as reported by 'The Age'?",
-        "Who is the figure associated with generative AI technology whose departure from OpenAI was considered shocking according to Fortune, and is also the subject of a prevailing theory suggesting a lack of full truthfulness with the board as reported by TechCrunch?"
-    ]
+    with open("MultiHopRAG.json", "r") as f:
+        content = json.load(f)
+
+    start = 0
+    end = 50
+
+    content = content[start:end]
+
+    queries = [data['query'] for data in content]
 
     # For Evaluation
-    answers = [
-        "Sam Bankman-Fried",
-        "Donald Trump",
-        "Sam Altman"
-    ]
+    answers = [data['answer'] for data in content]
 
-    gold_docs = [
-        [   
-            df.loc[df['title'] == "The FTX trial is bigger than Sam Bankman-Fried", 'content'].iloc[0],
-            df.loc[df['title'] == "SBF\u2019s trial starts soon, but how did he \u2014 and FTX \u2014 get here?", 'content'].iloc[0]
-        ],
-        [
-            df.loc[df['title'] == "Donald Trump defrauded banks with 'fantasy' to build his real estate empire, judge rules in a major repudiation against the former president", 'content'].iloc[0],
-            df.loc[df['title'] == "The $777 million surprise: Donald Trump is getting richer", 'content'].iloc[0]
-        ],
-        [
-            df.loc[df['title'] == "OpenAI's ex-chairman accuses board of going rogue in firing Altman: 'Sam and I are shocked and saddened by what the board did'", 'content'].iloc[0],
-            df.loc[df['title'] == "WTF is going on at OpenAI? We have theories", 'content'].iloc[0]
-        ]
-    ]
+    gold_docs = []
+
+    for data in content:
+        docs = []
+        for evidence in data['evidence_list']:
+            match = df.loc[df['title'] == evidence['title'], 'content']
+            if not match.empty:
+                docs.append(match.iloc[0])
+            else:
+                docs.append(None)  # or skip / handle as needed
+        gold_docs.append(docs)
 
     print(hipporag.rag_qa(queries=queries,
                                   gold_docs=gold_docs,
