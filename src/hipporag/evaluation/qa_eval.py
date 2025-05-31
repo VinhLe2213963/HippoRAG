@@ -37,6 +37,7 @@ class QAExactMatch(BaseMetric):
 
         for gold_list, predicted in zip(gold_answers, predicted_answers):
             print("-----------------------------------------")
+            print("GOLD_LIST:", gold_list)
             print("NORMALIZE_ANSWER_GOLD:", [normalize_answer(gold)for gold in gold_list])
             print("NORMALIZE_ANSWER_PRED:", normalize_answer(predicted))
             print("-----------------------------------------")
