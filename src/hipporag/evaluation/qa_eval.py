@@ -41,7 +41,7 @@ class QAExactMatch(BaseMetric):
             print("NORMALIZE_ANSWER_GOLD:", [normalize_answer(gold) for gold in gold_list])
             print("NORMALIZE_ANSWER_PRED:", normalize_answer(predicted))
             print("-----------------------------------------")
-            em_scores = [1.0 if normalize_answer(gold) == normalize_answer(predicted) else 0.0]
+            em_scores = [1.0 if normalize_answer(gold_list) == normalize_answer(predicted) else 0.0]
 
             aggregated_em = aggregation_fn(em_scores)
             example_eval_results.append({"ExactMatch": aggregated_em})
