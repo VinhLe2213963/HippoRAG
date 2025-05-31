@@ -500,7 +500,8 @@ class HippoRAG:
                 gold_answers=gold_answers, predicted_answers=[qa_result.answer for qa_result in queries_solutions],
                 aggregation_fn=np.max)
             print("------------------------------------------------------------------")
-            print("QUERIES: ", queries_solutions)
+            print("GOLD_ANSWERS:", gold_answers)
+            print("QUERIES: ", [qa_result in queries_solutions])
             print("------------------------------------------------------------------")
             overall_qa_f1_result, example_qa_f1_results = qa_f1_evaluator.calculate_metric_scores(
                 gold_answers=gold_answers, predicted_answers=[qa_result.answer for qa_result in queries_solutions],
