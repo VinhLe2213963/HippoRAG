@@ -37,7 +37,7 @@ def main():
         content = json.load(f)
 
     start = 0
-    end = 5
+    end = 20
 
     content = content[start:end]
 
