@@ -507,6 +507,8 @@ class HippoRAG:
                 gold_answers=gold_answers, predicted_answers=[qa_result.answer for qa_result in queries_solutions],
                 aggregation_fn=np.max)
 
+            os.environ["F1"] += str(round(float(overall_qa_f1_result), 4)) + "; "
+
             # round off to 4 decimal places for QA results
             overall_qa_em_result.update(overall_qa_f1_result)
             overall_qa_results = overall_qa_em_result
