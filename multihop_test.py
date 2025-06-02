@@ -58,9 +58,10 @@ def main():
                 docs.append(None)  # or skip / handle as needed
         gold_docs.append(docs)
 
-    print(hipporag.rag_qa(queries=queries,
+    results = hipporag.rag_qa(queries=queries,
                                   gold_docs=gold_docs,
-                                  gold_answers=answers))
+                                  gold_answers=answers)
+    print(results[4])
 
 if __name__ == "__main__":
     main()
