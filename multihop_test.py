@@ -61,7 +61,7 @@ def main():
     results = hipporag.rag_qa(queries=queries,
                                   gold_docs=gold_docs,
                                   gold_answers=answers)
-    print(results[4])
+    print(results[3:])
 
 if __name__ == "__main__":
     main()
